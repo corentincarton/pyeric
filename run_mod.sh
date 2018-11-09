@@ -5,12 +5,12 @@ for i in {3..20}
 do
   t=$(printf '%0.3d\n' $i)
   echo $t
-  python probCOS.py $t Kp1Alert Kp1Prob0_$i . 20
+  python $SCRIPT_DIR/probCOS.py $t Kp1Alert Kp1Prob0_$i . 20
   mv Kp1Prob0_$i.map Kp1Prob0.$t
 done
 
 echo "Calling old scripts for max" 
-pcrcalc -f max.mod 3 20 Kp1Prob . .
+pcrcalc -f $SCRIPT_DIR/max.mod 3 20 Kp1Prob . .
 
 #echo
 #echo "New python script for max"

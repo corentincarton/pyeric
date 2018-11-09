@@ -8,24 +8,21 @@ function diff_mean() {
   done
 }
  
-PCRASTER_INSTALL=~/install/pcraster-git
-ENV_ROOT=~/install/miniconda3/envs/pcraster
- 
-source activate pcraster
-conda env list
- 
-export PYTHONPATH=$PCRASTER_INSTALL/python:$PYTHONPATH
-export LD_LIBRARY_PATH=$PCRASTER_INSTALL/lib:$LD_LIBRARY_PATH
-export PATH=$PCRASTER_INSTALL/bin:$PATH
-export LD_LIBRARY_PATH=$ENV_ROOT/lib:$LD_LIBRARY_PATH
+module unload python
+module load python pcraster/4.0.1
+#module load python/3.7.0-miniconda pcraster/git
+#source activate pcraster
+#export LD_LIBRARY_PATH=~/install/miniconda3/envs/pcraster/lib:$LD_LIBRARY_PATH
+
+export SCRIPT_DIR=~/git/pcraster-example
 
 echo
 echo "Calling old scripts (python and mod)" 
-time ./run_mod.sh
+time $SCRIPT_DIR/run_mod.sh
 
 echo
 echo "New global python script"
-time python compute_stats.py
+time python $SCRIPT_DIR/compute_stats.py
 diff Kp1Prob_max.map Kp1Prob.map
 diff_mean
 
