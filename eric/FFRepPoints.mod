@@ -16,7 +16,9 @@ binding
  
  RepP1 = $1\RepP1.map;
  RepP2 = $1\RepP2.map;
- 
+
+ Kp1PaT = $1\Kp1PaT.map;
+
  nENS = $6;
  
 areamap
@@ -33,7 +35,7 @@ initial
 
 dynamic
  
- Kp1PaT = (Kp1P ge MemberTH1*100/nENS); 	#Kp1PG above Threshold 1
+ report Kp1PaT = (Kp1P ge MemberTH1*100/nENS); 	#Kp1PG above Threshold 1
 # Kp2PaT = (Kp2P ge MemberTH2*100/nENS); 	#Kp2PG above Threshold 2
  
  Kp1PaT2=catchment(Ldd,Kp1PaT);	 #Cos prendo solo un punto anche se ho diversi threshold exceedances (disconnessi) pi a monte
