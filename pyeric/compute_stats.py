@@ -1,6 +1,10 @@
-from pcraster import *
+#from pcraster import *
 from pcraster.framework import *
 from numpy import *
+from pcraster.multicore import *
+
+import time as systime
+print("Number of threads: " + str(nr_worker_threads()))
 
 setclone('area.map')
 
@@ -17,7 +21,6 @@ for t in time:
   
   mapmean = scalar(0)
   for e in ens:
-    #print('Accumulating ensemble ' + str(e))
     mapval = readmap(str(e) + '/Kp1Alert.{:03}'.format(t))
     mapmean = mapmean + mapval
   mapmean = mapmean/nens
@@ -26,3 +29,4 @@ for t in time:
   mapmax = max(mapmax, mapmean)
 
 report(mapmax, "Kp1Prob_max.map")
+
